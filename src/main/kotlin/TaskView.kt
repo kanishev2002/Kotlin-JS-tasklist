@@ -1,6 +1,8 @@
 import kotlinx.html.js.onClickFunction
 import react.*
 import react.dom.*
+import styled.*
+import styles.TaskViewStyle
 
 external interface TaskViewProps : RProps {
     var task: Task
@@ -12,31 +14,59 @@ class TaskView : RComponent<TaskViewProps, RState>() {
     }
 
     override fun RBuilder.render() {
-        div {
-            div {
+        styledDiv {
+            styledDiv {
+                css {
+                    +TaskViewStyle.taskView
+                }
                 val classNames = if (props.task.isCompleted) {
                     "fas fa-circle"
                 } else {
                     "far fa-circle"
                 }
-                button {
+                styledButton {
+                    css {
+                        +TaskViewStyle.taskCompletionButton
+                    }
                     attrs {
                         onClickFunction = {
                             handleClick(props.task.id)
                         }
                     }
-                    i(classes = classNames) {}
+                    styledI {
+                        css {
+                            classes = mutableListOf(classNames)
+                            +(if (props.task.isCompleted) {
+                                TaskViewStyle.completedTask
+                            } else {
+                                TaskViewStyle.completedTask
+                            })
+                        }
+                    }
                 }
-                div {
-                    div {
+                styledDiv {
+                    css {
+                        +TaskViewStyle.task
+                    }
+                    styledDiv {
+                        css {
+                            +TaskViewStyle.taskName
+                        }
                         +props.task.name
                     }
-                    div {
+                    styledDiv {
+                        css {
+                            +TaskViewStyle.taskDescription
+                        }
                         +props.task.description
                     }
                 }
             }
-            hr {}
+            styledHr {
+                css {
+                    +TaskViewStyle.hr
+                }
+            }
         }
     }
 }
