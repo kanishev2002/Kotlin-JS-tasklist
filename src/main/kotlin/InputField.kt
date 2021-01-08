@@ -16,11 +16,11 @@ class InputField : RComponent<InputFieldProps, RState>() {
     override fun RBuilder.render() {
         styledDiv {
             css {
-                InputFieldStyle.inputField
+                +InputFieldStyle.inputField
             }
             styledInput {
                 css {
-                    InputFieldStyle.inputBorder
+                    +InputFieldStyle.inputBorder
                 }
                 attrs {
                     value = props.value

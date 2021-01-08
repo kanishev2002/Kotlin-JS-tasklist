@@ -19,9 +19,9 @@ class App : RComponent<RProps, AppState>() {
             setState {
                 tasks += listOf(
                     Task(
-                        this.currentId + 1,
-                        this.inputNameValue,
-                        this.inputDescriptionValue,
+                        currentId + 1,
+                        inputNameValue,
+                        inputDescriptionValue,
                         false
                     )
                 )
@@ -62,20 +62,24 @@ class App : RComponent<RProps, AppState>() {
         }
         styledDiv {
             css {
-                AppStyle.app
+                +AppStyle.app
             }
             styledDiv {
+                css {
+                    +AppStyle.taskList
+                }
                 // TODO: actually implement tasks
                 // val tasks = state.tasks
                 child(TaskList::class) {
                     attrs.tasks = listOf(
-                        Task(1, "task1", "task description", false)
+                        Task(1, "task1", "task description", false),
+                        Task(2, "task2", "another task description", true)
                     )
                 }
             }
             styledDiv {
                 css {
-                    AppStyle.inputFields
+                    +AppStyle.inputFields
                 }
                 child(InputField::class) {
                     attrs {
@@ -94,7 +98,7 @@ class App : RComponent<RProps, AppState>() {
                 styledDiv {
                     styledButton {
                         css {
-                            AppStyle.submitButton
+                            +AppStyle.submitButton
                         }
                         attrs {
                             onClickFunction = {

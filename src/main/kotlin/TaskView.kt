@@ -39,7 +39,7 @@ class TaskView : RComponent<TaskViewProps, RState>() {
                             +(if (props.task.isCompleted) {
                                 TaskViewStyle.completedTask
                             } else {
-                                TaskViewStyle.completedTask
+                                TaskViewStyle.incompleteTask
                             })
                         }
                     }

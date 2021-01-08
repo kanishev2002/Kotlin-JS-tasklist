@@ -3,7 +3,7 @@ package styles
 import kotlinx.css.*
 import styled.*
 
-object TaskViewStyle : StyleSheet("InputFieldStyle", isStatic = true) {
+object TaskViewStyle : StyleSheet("TaskViewStyle", isStatic = true) {
     val taskView by css {
         display = Display.flex
         flexDirection = FlexDirection.row

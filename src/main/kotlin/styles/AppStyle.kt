@@ -9,6 +9,7 @@ object AppStyle : StyleSheet("AppStyle", isStatic = true) {
     private val offWhite = rgb(225, 225, 235)
     private val blackShadow = rgba(0, 0, 0, 0.2)
     private val whiteShadow = rgba(255, 255, 255, 0.7)
+
     val app by css {
         display = Display.flex
         flexDirection = FlexDirection.row
