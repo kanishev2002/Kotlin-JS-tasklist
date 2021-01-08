@@ -1,0 +1,44 @@
+.taskView {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+}
+
+.task {
+  display: flex;
+  flex-direction: column;
+}
+
+.taskName {
+  font-family: "Helvetica Neue";
+  font-size: 20px;
+}
+
+.taskDescription {
+  font-family: "Helvetica Neue";
+  font-size: 12px;
+  font-style: italic;
+}
+
+.taskCompletionButton {
+  border: none;
+  background-color: transparent;
+}
+
+.completedTask {
+  color: orange;
+  font-size: 20px;
+}
+
+.incompleteTask {
+  color: darkgray;
+  font-size: 20px;
+}
+
+.hr {
+  color: #E6E6E6;
+  width: 97%;
+}
+
+/*# sourceMappingURL=taskView.css.map */
