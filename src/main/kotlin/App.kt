@@ -4,7 +4,6 @@ import kotlinx.css.*
 import kotlinx.html.js.onClickFunction
 import org.w3c.dom.events.Event
 import styled.*
-import styles.AppStyle
 
 external interface AppState : RState {
     var currentId: Int
@@ -49,25 +48,13 @@ class App : RComponent<RProps, AppState>() {
     }
 
     override fun RBuilder.render() {
-        styledDiv {
-            css {
-                +AppStyle.appHeader
-            }
-            styledH1 {
-                css {
-                    +AppStyle.headerText
-                }
+        div {
+            h1 {
                 +"TODO List"
             }
         }
-        styledDiv {
-            css {
-                +AppStyle.app
-            }
-            styledDiv {
-                css {
-                    +AppStyle.taskList
-                }
+        div {
+            div {
                 // TODO: actually implement tasks
                 // val tasks = state.tasks
                 child(TaskList::class) {
@@ -76,36 +63,30 @@ class App : RComponent<RProps, AppState>() {
                         Task(2, "task2", "another task description", true)
                     )
                 }
-            }
-            styledDiv {
-                css {
-                    +AppStyle.inputFields
-                }
-                child(InputField::class) {
-                    attrs {
-                        value = state.inputNameValue
-                        onChange = { handleNameInput(it) }
-                        placeholder = "Input name of the task"
-                    }
-                }
-                child(InputField::class) {
-                    attrs {
-                        value = state.inputDescriptionValue
-                        onChange = { handleDescriptionInput(it) }
-                        placeholder = "Input task description"
-                    }
-                }
-                styledDiv {
-                    styledButton {
-                        css {
-                            +AppStyle.submitButton
-                        }
+                div {
+                    child(InputField::class) {
                         attrs {
-                            onClickFunction = {
-                                handleSubmitButton()
-                            }
+                            value = state.inputNameValue
+                            onChange = { handleNameInput(it) }
+                            placeholder = "Input name of the task"
                         }
-                        +"Submit"
+                    }
+                    child(InputField::class) {
+                        attrs {
+                            value = state.inputDescriptionValue
+                            onChange = { handleDescriptionInput(it) }
+                            placeholder = "Input task description"
+                        }
+                    }
+                    div {
+                        button {
+                            attrs {
+                                onClickFunction = {
+                                    handleSubmitButton()
+                                }
+                            }
+                            +"Submit"
+                        }
                     }
                 }
             }

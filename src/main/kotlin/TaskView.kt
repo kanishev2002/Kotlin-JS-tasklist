@@ -1,8 +1,6 @@
 import kotlinx.html.js.onClickFunction
 import react.*
 import react.dom.*
-import styled.*
-import styles.TaskViewStyle
 
 external interface TaskViewProps : RProps {
     var task: Task
@@ -14,25 +12,20 @@ class TaskView : RComponent<TaskViewProps, RState>() {
     }
 
     override fun RBuilder.render() {
-        styledDiv {
-            styledDiv {
-                css {
-                    +TaskViewStyle.taskView
-                }
+        div {
+            div {
                 val classNames = if (props.task.isCompleted) {
                     "fas fa-circle"
                 } else {
                     "far fa-circle"
                 }
-                styledButton {
-                    css {
-                        +TaskViewStyle.taskCompletionButton
-                    }
+                button {
                     attrs {
                         onClickFunction = {
                             handleClick(props.task.id)
                         }
                     }
+<<<<<<< HEAD
                     styledI {
                         css {
                             classes = mutableListOf(classNames)
@@ -43,30 +36,20 @@ class TaskView : RComponent<TaskViewProps, RState>() {
                             })
                         }
                     }
+=======
+                    i(classes = classNames) {}
+>>>>>>> parent of 7a8cd8e... Added styling
                 }
-                styledDiv {
-                    css {
-                        +TaskViewStyle.task
-                    }
-                    styledDiv {
-                        css {
-                            +TaskViewStyle.taskName
-                        }
+                div {
+                    div {
                         +props.task.name
                     }
-                    styledDiv {
-                        css {
-                            +TaskViewStyle.taskDescription
-                        }
+                    div {
                         +props.task.description
                     }
                 }
             }
-            styledHr {
-                css {
-                    +TaskViewStyle.hr
-                }
-            }
+            hr {}
         }
     }
 }

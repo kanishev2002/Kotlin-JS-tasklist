@@ -2,8 +2,6 @@ import kotlinx.html.js.onChangeFunction
 import org.w3c.dom.events.Event
 import react.*
 import react.dom.*
-import styled.*
-import styles.InputFieldStyle
 
 external interface InputFieldProps : RProps {
     var value: String
@@ -14,6 +12,7 @@ external interface InputFieldProps : RProps {
 
 class InputField : RComponent<InputFieldProps, RState>() {
     override fun RBuilder.render() {
+<<<<<<< HEAD
         styledDiv {
             css {
                 +InputFieldStyle.inputField
@@ -22,6 +21,10 @@ class InputField : RComponent<InputFieldProps, RState>() {
                 css {
                     +InputFieldStyle.inputBorder
                 }
+=======
+        div {
+            input {
+>>>>>>> parent of 7a8cd8e... Added styling
                 attrs {
                     value = props.value
                     placeholder = props.placeholder
