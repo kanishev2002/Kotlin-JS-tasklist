@@ -1,0 +1,54 @@
+.app {
+  display: flex;
+  flex-direction: row;
+}
+
+.appHeader {
+  height: 70px;
+  display: flex;
+  align-items: center;
+  background: #02a8e2;
+  background: linear-gradient(170deg, #02a8e2 37%, #090979 100%);
+  margin-bottom: 10px;
+}
+
+.headerText {
+  margin-left: 5px;
+  font-weight: bold;
+  font-size: 40px;
+  color: white;
+}
+
+.inputFields {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 20px;
+  border-radius: 20px;
+  background-color: #e1e1eb;
+  height: 80px;
+  align-items: center;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
+}
+
+.taskList {
+  display: flex;
+  flex-direction: column;
+  flex: 4;
+}
+
+.submit-button {
+  padding: 5px;
+  border-radius: 20px;
+  border-width: 0;
+  color: black;
+  background: #e1e1eb;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2), -10px -3px 10px rgba(255, 255, 255, 0.7);
+}
+.submit-button:active {
+  box-shadow: none;
+  border-width: 1px;
+  border-color: whitesmoke;
+}
+
+/*# sourceMappingURL=app.css.map */

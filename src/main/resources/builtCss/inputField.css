@@ -1,0 +1,11 @@
+.inputField {
+  padding: 5px;
+}
+
+.inputBorder {
+  border-width: 0;
+  border-radius: 5px;
+  box-shadow: 5px 5px 6px rgba(0, 0, 0, 0.2), -5px -4px 6px rgba(255, 255, 255, 0.7);
+}
+
+/*# sourceMappingURL=inputField.css.map */

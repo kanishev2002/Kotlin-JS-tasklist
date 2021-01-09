@@ -13,13 +13,13 @@ class TaskView : RComponent<TaskViewProps, RState>() {
 
     override fun RBuilder.render() {
         div {
-            div {
+            div(classes = "taskView") {
                 val classNames = if (props.task.isCompleted) {
-                    "fas fa-circle"
+                    "fas fa-circle completedTask"
                 } else {
-                    "far fa-circle"
+                    "far fa-circle incompleteTask"
                 }
-                button {
+                button(classes = "taskCompletionButton") {
                     attrs {
                         onClickFunction = {
                             handleClick(props.task.id)
@@ -27,16 +27,16 @@ class TaskView : RComponent<TaskViewProps, RState>() {
                     }
                     i(classes = classNames) {}
                 }
-                div {
-                    div {
+                div(classes = "task") {
+                    div(classes = "taskName") {
                         +props.task.name
                     }
-                    div {
+                    div(classes = "taskDescription") {
                         +props.task.description
                     }
                 }
             }
-            hr {}
+            hr(classes = "hr") {}
         }
     }
 }
