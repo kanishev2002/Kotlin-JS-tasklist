@@ -12,19 +12,8 @@ external interface InputFieldProps : RProps {
 
 class InputField : RComponent<InputFieldProps, RState>() {
     override fun RBuilder.render() {
-<<<<<<< HEAD
-        styledDiv {
-            css {
-                +InputFieldStyle.inputField
-            }
-            styledInput {
-                css {
-                    +InputFieldStyle.inputBorder
-                }
-=======
-        div {
-            input {
->>>>>>> parent of 7a8cd8e... Added styling
+        div(classes = "inputField") {
+            input(classes = "inputBorder") {
                 attrs {
                     value = props.value
                     placeholder = props.placeholder
