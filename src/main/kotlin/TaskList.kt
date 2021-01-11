@@ -4,7 +4,7 @@ import kotlinx.css.*
 import styled.*
 
 external interface TaskListProps : RProps {
-    var tasks: List<Task>
+    var tasks: Array<Task>
 }
 
 class TaskList : RComponent<TaskListProps, RState>() {

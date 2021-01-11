@@ -1,8 +1,11 @@
 import react.dom.*
 import kotlinx.browser.document
+import react.redux.provider
 
 fun main() {
     render(document.getElementById("root")) {
-        child(App::class) {}
+        provider(store) {
+            connectedApp {}
+        }
     }
 }
