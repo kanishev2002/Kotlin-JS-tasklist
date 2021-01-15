@@ -1,4 +1,5 @@
 import kotlinx.browser.document
+import kotlinx.css.i
 import kotlinx.html.js.onClickFunction
 import org.w3c.dom.HTMLInputElement
 import org.w3c.dom.events.Event
@@ -12,16 +13,25 @@ import redux.RAction
 import redux.WrapperAction
 import redux.createStore
 import redux.rEnhancer
+//import kotlin.js.Date
 import kotlin.random.Random
+
+data class Store(var tasks: List<Task>,
+                 var inputParameters: MutableMap<String, String>)
 
 class AddTask(val task: Task) : RAction
 
-private fun appReducer(state: Array<Task> = emptyArray(), action: RAction): Array<Task> = when (action) {
-    is AddTask -> state + action.task
+private fun appReducer(state: Store, action: RAction): Store = when (action) {
+    is AddTask -> Store(state.tasks + action.task, mutableMapOf())
+    is ChangeInputParameters -> {
+        val newParameters = state.inputParameters.toMutableMap()
+        newParameters[action.key] = action.value
+        state.copy(inputParameters = newParameters)
+    }
     else -> state
 }
 
-val store = createStore(::appReducer, emptyArray(), rEnhancer())
+val store = createStore(::appReducer, Store(emptyList(), mutableMapOf()), rEnhancer())
 
 object IdGenerator {
     var id = 1
@@ -29,33 +39,32 @@ object IdGenerator {
 }
 
 private interface AppStateProps : RProps {
-    var tasks: Array<Task>
+    var tasks: List<Task>
+    var inputParameters: MutableMap<String, String>
 }
 
 private interface AppDispatchProps : RProps {
-    var onClick: () -> Unit
+    var onClick: (String?, String?, String?) -> Unit
 }
 
-val connectedApp: RClass<AppProps> =
-    rConnect<Array<Task>, AddTask, WrapperAction, RProps, AppStateProps, AppDispatchProps, AppProps>(
+val connectedApp: RClass<RProps> =
+    rConnect<Store, AddTask, WrapperAction, RProps, AppStateProps, AppDispatchProps, AppProps>(
         { state, _ ->
-            tasks = state
+            tasks = state.tasks
+            inputParameters = state.inputParameters
         },
         { dispatch, _ ->
-            onClick = {
-                val taskName = (document.getElementById(
-                    "Name input field"
-                ) as? HTMLInputElement)?.value
-                val taskDescription = (document.getElementById(
-                    "Description input field"
-                ) as? HTMLInputElement)?.value ?: ""
+            onClick = { taskName, taskDescription, taskDeadline ->
+                //val taskName = (it.target as? HTMLInputElement)?.value
+                //val taskDescription = (it.target as? HTMLInputElement)?.value ?: ""
                 if (!taskName.isNullOrEmpty()) {
                     dispatch(
                         AddTask(
                             Task(
                                 IdGenerator.id,
                                 taskName,
-                                taskDescription,
+                                taskDescription ?: "",
+                                taskDeadline ?: "",
                                 false
                             )
                         )
@@ -66,9 +75,11 @@ val connectedApp: RClass<AppProps> =
     )(App::class.js.unsafeCast<RClass<AppProps>>())
 
 external interface AppProps : RProps {
-    var tasks: Array<Task>
-    var onClick: () -> Unit
+    var tasks: List<Task>
+    var inputParameters: MutableMap<String, String>
+    var onClick: (String?, String?, String?) -> Unit
 }
+
 
 class App : RComponent<AppProps, RState>() {
 
@@ -103,11 +114,21 @@ class App : RComponent<AppProps, RState>() {
                         placeholder = "Input task description"
                     }
                 }
+                child(InputField::class) {
+                    attrs {
+                        id = "Deadline input field"
+                        placeholder = "Input task deadline"
+                    }
+                }
                 div("submit-button-area") {
                     button(classes = "submit-button") {
                         attrs {
                             onClickFunction = {
-                                props.onClick()
+                                props.onClick(
+                                    props.inputParameters["Name input field"],
+                                    props.inputParameters["Description input field"],
+                                    props.inputParameters["Input task deadline"]
+                                )
                             }
                         }
                         +"Submit"
