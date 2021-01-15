@@ -1,6 +1,15 @@
+package components
+
+import entities.Task
 import kotlinx.html.js.onClickFunction
-import react.*
-import react.dom.*
+import react.RBuilder
+import react.RComponent
+import react.RProps
+import react.RState
+import react.dom.button
+import react.dom.div
+import react.dom.hr
+import react.dom.i
 
 external interface TaskViewProps : RProps {
     var task: Task

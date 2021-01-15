@@ -1,4 +1,4 @@
-import kotlin.js.Date
+package entities
 
 data class Task(
     val id: Int,
