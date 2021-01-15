@@ -1,23 +1,18 @@
-import kotlinx.browser.document
-import kotlinx.css.i
 import kotlinx.html.js.onClickFunction
-import org.w3c.dom.HTMLInputElement
-import org.w3c.dom.events.Event
 import react.*
 import react.dom.button
 import react.dom.div
 import react.dom.h1
-import react.redux.provider
 import react.redux.rConnect
 import redux.RAction
 import redux.WrapperAction
 import redux.createStore
 import redux.rEnhancer
-//import kotlin.js.Date
-import kotlin.random.Random
 
-data class Store(var tasks: List<Task>,
-                 var inputParameters: MutableMap<String, String>)
+data class Store(
+    var tasks: List<Task>,
+    var inputParameters: MutableMap<String, String>
+)
 
 class AddTask(val task: Task) : RAction
 
@@ -55,6 +50,9 @@ val connectedApp: RClass<RProps> =
         },
         { dispatch, _ ->
             onClick = { taskName, taskDescription, taskDeadline ->
+                println(taskName)
+                println(taskDescription)
+                println(taskDeadline)
                 //val taskName = (it.target as? HTMLInputElement)?.value
                 //val taskDescription = (it.target as? HTMLInputElement)?.value ?: ""
                 if (!taskName.isNullOrEmpty()) {
@@ -98,7 +96,7 @@ class App : RComponent<AppProps, RState>() {
                 }
             }
             div(classes = "inputFields") {
-                child(InputField::class) {
+                connectedInputField {
                     attrs {
                         //value = state.inputNameValue
                         //onChange = { handleNameInput(it) }
@@ -106,7 +104,7 @@ class App : RComponent<AppProps, RState>() {
                         placeholder = "Input name of the task"
                     }
                 }
-                child(InputField::class) {
+                connectedInputField {
                     attrs {
                         //value = state.inputDescriptionValue
                         //onChange = { handleDescriptionInput(it) }
@@ -114,7 +112,7 @@ class App : RComponent<AppProps, RState>() {
                         placeholder = "Input task description"
                     }
                 }
-                child(InputField::class) {
+                connectedInputField {
                     attrs {
                         id = "Deadline input field"
                         placeholder = "Input task deadline"
@@ -127,7 +125,7 @@ class App : RComponent<AppProps, RState>() {
                                 props.onClick(
                                     props.inputParameters["Name input field"],
                                     props.inputParameters["Description input field"],
-                                    props.inputParameters["Input task deadline"]
+                                    props.inputParameters["Deadline input field"]
                                 )
                             }
                         }

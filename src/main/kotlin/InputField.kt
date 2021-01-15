@@ -55,7 +55,7 @@ class InputField : RComponent<InputFieldProps, InputFieldState>() {
                     placeholder = props.placeholder
                     onChangeFunction = {
                         val value = (it.target as? HTMLInputElement)?.value
-                        //props.onChange(value ?: "")
+                        props.onChange(value ?: "")
                         setState {
                             this.value = value
                         }
