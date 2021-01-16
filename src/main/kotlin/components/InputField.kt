@@ -1,5 +1,6 @@
 package components
 
+import kotlinx.html.InputType
 import kotlinx.html.id
 import kotlinx.html.js.onChangeFunction
 import org.w3c.dom.HTMLInputElement
@@ -11,6 +12,7 @@ external interface InputFieldProps : RProps {
     var id: String
     var placeholder: String
     var onChange: (String) -> Unit
+    var type: InputType
 }
 
 external interface InputFieldState : RState {
@@ -25,6 +27,7 @@ class InputField : RComponent<InputFieldProps, InputFieldState>() {
                     id = props.id
                     value = state.value ?: ""
                     placeholder = props.placeholder
+                    type = props.type
                     onChangeFunction = {
                         val value = (it.target as? HTMLInputElement)?.value
                         props.onChange(value ?: "")

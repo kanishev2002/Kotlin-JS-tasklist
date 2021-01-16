@@ -2,6 +2,7 @@ package components
 
 import containers.connectedInputField
 import entities.Task
+import kotlinx.html.InputType
 import kotlinx.html.js.onClickFunction
 import react.RBuilder
 import react.RComponent
@@ -9,7 +10,6 @@ import react.RProps
 import react.RState
 import react.dom.button
 import react.dom.div
-import react.dom.h1
 
 
 external interface AppProps : RProps {
@@ -33,7 +33,7 @@ class App : RComponent<AppProps, RState>() {
 
     override fun RBuilder.render() {
         div(classes = "appHeader") {
-            h1(classes = "headerText") {
+            div(classes = "headerText") {
                 +"TODO List"
             }
         }
@@ -48,18 +48,21 @@ class App : RComponent<AppProps, RState>() {
                     attrs {
                         id = nameId
                         placeholder = namePlaceholder
+                        type = InputType.text
                     }
                 }
                 connectedInputField {
                     attrs {
                         id = descriptionId
                         placeholder = descriptionPlaceholder
+                        type = InputType.text
                     }
                 }
                 connectedInputField {
                     attrs {
                         id = deadlineId
                         placeholder = deadlinePlaceholder
+                        type = InputType.dateTimeLocal
                     }
                 }
                 div("submit-button-area") {
@@ -71,6 +74,7 @@ class App : RComponent<AppProps, RState>() {
                                     props.inputParameters[descriptionId],
                                     props.inputParameters[deadlineId]
                                 )
+
                             }
                         }
                         +"Submit"

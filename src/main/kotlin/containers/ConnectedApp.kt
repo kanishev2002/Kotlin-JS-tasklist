@@ -5,16 +5,19 @@ import components.App
 import components.AppProps
 import entities.Store
 import entities.Task
+import kotlinx.browser.document
+import org.w3c.dom.HTMLInputElement
 import react.RClass
 import react.RProps
 import react.invoke
 import react.redux.rConnect
 import redux.WrapperAction
+import kotlin.js.Date
 
 
 object IdGenerator {
     var id = 1
-    fun get() = id++
+        get() = field++
 }
 
 private interface AppStateProps : RProps {
@@ -36,17 +39,18 @@ val connectedApp: RClass<RProps> =
         { dispatch, _ ->
             onClick = { taskName, taskDescription, taskDeadline ->
                 if (!taskName.isNullOrEmpty()) {
-                    dispatch(
-                        AddTask(
-                            Task(
-                                IdGenerator.id,
-                                taskName,
-                                taskDescription ?: "",
-                                taskDeadline ?: "",
-                                false
-                            )
-                        )
+                    val newTask = Task(
+                        IdGenerator.id,
+                        taskName,
+                        taskDescription ?: "",
+                        taskDeadline ?: "",
+                        Date(Date.now()),
+                        false
                     )
+                    dispatch(AddTask(newTask))
+                    (document.getElementById(App.nameId) as? HTMLInputElement)?.value = ""
+                    (document.getElementById(App.descriptionId) as? HTMLInputElement)?.value = ""
+                    (document.getElementById(App.deadlineId) as? HTMLInputElement)?.value = ""
                 }
             }
         }

@@ -7,7 +7,7 @@ import reducers.appReducer
 import redux.createStore
 import redux.rEnhancer
 
-val store = createStore(::appReducer, Store(emptyList(), mutableMapOf()), rEnhancer())
+val store = createStore(::appReducer, Store(), rEnhancer())
 
 fun main() {
     render(document.getElementById("root")) {

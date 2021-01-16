@@ -1,6 +1,6 @@
 package entities
 
 data class Store(
-    var tasks: List<Task>,
-    var inputParameters: MutableMap<String, String>
+    var tasks: List<Task> = emptyList(),
+    var inputParameters: MutableMap<String, String> = mutableMapOf()
 )

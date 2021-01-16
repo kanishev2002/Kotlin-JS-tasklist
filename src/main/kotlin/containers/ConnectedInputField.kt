@@ -4,6 +4,7 @@ import actions.ChangeInputParameters
 import components.InputField
 import components.InputFieldProps
 import entities.Store
+import kotlinx.html.InputType
 import react.RClass
 import react.RProps
 import react.invoke
@@ -13,6 +14,7 @@ import redux.WrapperAction
 external interface InputStateProps : RProps {
     var id: String
     var placeholder: String
+    var type: InputType
 }
 
 external interface InputDispatchProps : RProps {
@@ -25,6 +27,7 @@ val connectedInputField: RClass<InputStateProps> =
         { _, ownProps ->
             id = ownProps.id
             placeholder = ownProps.placeholder
+            type = ownProps.type
         },
         { dispatch, ownProps ->
             onChange = {

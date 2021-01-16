@@ -1,5 +1,6 @@
 package components
 
+import containers.ConnectedTaskView
 import entities.Task
 import react.RBuilder
 import react.RComponent
@@ -13,7 +14,7 @@ external interface TaskListProps : RProps {
 class TaskList : RComponent<TaskListProps, RState>() {
     override fun RBuilder.render() {
         for (task in props.tasks) {
-            child(TaskView::class) {
+            ConnectedTaskView {
                 key = task.id.toString()
                 attrs.task = task
             }
