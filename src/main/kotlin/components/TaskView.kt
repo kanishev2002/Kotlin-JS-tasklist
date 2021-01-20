@@ -1,15 +1,22 @@
+package components
+
+import entities.Task
 import kotlinx.html.js.onClickFunction
-import react.*
-import react.dom.*
+import react.RBuilder
+import react.RComponent
+import react.RProps
+import react.RState
+import react.dom.button
+import react.dom.div
+import react.dom.hr
+import react.dom.i
 
 external interface TaskViewProps : RProps {
+    var handleClick: () -> Unit
     var task: Task
 }
 
 class TaskView : RComponent<TaskViewProps, RState>() {
-    private fun handleClick(id: Int) {
-        TODO()
-    }
 
     override fun RBuilder.render() {
         div {
@@ -22,7 +29,7 @@ class TaskView : RComponent<TaskViewProps, RState>() {
                 button(classes = "taskCompletionButton") {
                     attrs {
                         onClickFunction = {
-                            handleClick(props.task.id)
+                            props.handleClick()
                         }
                     }
                     i(classes = classNames) {}
@@ -31,8 +38,15 @@ class TaskView : RComponent<TaskViewProps, RState>() {
                     div(classes = "taskName") {
                         +props.task.name
                     }
-                    div(classes = "taskDescription") {
-                        +props.task.description
+                    if(props.task.description.isNotEmpty()) {
+                        div(classes = "taskDescription") {
+                            +props.task.description
+                        }
+                    }
+                    if(props.task.deadline.isNotEmpty()) {
+                        div(classes = "taskDescription"){
+                            +("Due on: " + props.task.deadline)
+                        }
                     }
                 }
             }
