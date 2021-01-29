@@ -4,10 +4,7 @@ import containers.connectedInputField
 import entities.Task
 import kotlinx.html.InputType
 import kotlinx.html.js.onClickFunction
-import react.RBuilder
-import react.RComponent
-import react.RProps
-import react.RState
+import react.*
 import react.dom.button
 import react.dom.div
 
@@ -18,8 +15,19 @@ external interface AppProps : RProps {
     var onClick: (String?, String?, String?) -> Unit
 }
 
+external interface AppState : RState {
+    var isLoggedIn: Boolean
+}
 
-class App : RComponent<AppProps, RState>() {
+val header = functionalComponent<RProps> {
+    div(classes = "appHeader") {
+        div(classes = "headerText") {
+            +"TODO List"
+        }
+    }
+}
+
+class App : RComponent<AppProps, AppState>() {
     companion object Strings {
         const val nameId = "Name input field"
         const val namePlaceholder = "Input name of the task"
@@ -32,52 +40,61 @@ class App : RComponent<AppProps, RState>() {
     }
 
     override fun RBuilder.render() {
-        div(classes = "appHeader") {
-            div(classes = "headerText") {
-                +"TODO List"
+        if(!state.isLoggedIn){
+            child(login) {
+                attrs{
+                    setLoggedIn = {
+                        setState {
+                            isLoggedIn = it
+                        }
+                    }
+                }
             }
         }
-        div(classes = "app") {
-            div(classes = "taskList") {
-                child(TaskList::class) {
-                    attrs.tasks = props.tasks
-                }
-            }
-            div(classes = "inputFields") {
-                connectedInputField {
-                    attrs {
-                        id = nameId
-                        placeholder = namePlaceholder
-                        type = InputType.text
+        else {
+            child(header) {}
+            div(classes = "app") {
+                div(classes = "taskList") {
+                    child(TaskList::class) {
+                        attrs.tasks = props.tasks
                     }
                 }
-                connectedInputField {
-                    attrs {
-                        id = descriptionId
-                        placeholder = descriptionPlaceholder
-                        type = InputType.text
-                    }
-                }
-                connectedInputField {
-                    attrs {
-                        id = deadlineId
-                        placeholder = deadlinePlaceholder
-                        type = InputType.dateTimeLocal
-                    }
-                }
-                div("submit-button-area") {
-                    button(classes = "submit-button") {
+                div(classes = "inputFields") {
+                    connectedInputField {
                         attrs {
-                            onClickFunction = {
-                                props.onClick(
-                                    props.inputParameters[nameId],
-                                    props.inputParameters[descriptionId],
-                                    props.inputParameters[deadlineId]
-                                )
-
-                            }
+                            id = nameId
+                            placeholder = namePlaceholder
+                            type = InputType.text
                         }
-                        +"Submit"
+                    }
+                    connectedInputField {
+                        attrs {
+                            id = descriptionId
+                            placeholder = descriptionPlaceholder
+                            type = InputType.text
+                        }
+                    }
+                    connectedInputField {
+                        attrs {
+                            id = deadlineId
+                            placeholder = deadlinePlaceholder
+                            type = InputType.dateTimeLocal
+                        }
+                    }
+                    div("submit-button-area") {
+                        button(classes = "submit-button") {
+                            attrs {
+                                onClickFunction = {
+                                    props.onClick(
+                                        props.inputParameters[nameId],
+                                        props.inputParameters[descriptionId],
+                                        props.inputParameters[deadlineId]
+                                    )
+
+                                }
+                            }
+                            +"Submit"
+                        }
                     }
                 }
             }

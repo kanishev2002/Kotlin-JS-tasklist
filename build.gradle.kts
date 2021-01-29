@@ -1,9 +1,11 @@
 plugins {
     id("org.jetbrains.kotlin.js") version "1.4.20"
+    kotlin("plugin.serialization") version "1.4.10"
 }
 
 group = "org.example"
 version = "1.0-SNAPSHOT"
+
 
 repositories {
     maven("https://kotlin.bintray.com/kotlin-js-wrappers/")
@@ -31,6 +33,14 @@ dependencies {
     implementation("org.jetbrains:kotlin-styled:1.0.0-pre.110-kotlin-1.4.0")
     implementation(npm("styled-components", "~5.1.1"))
     implementation(npm("inline-style-prefixer", "~6.0.0"))
+
+    //Coroutines
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9")
+
+    // Ktor
+    implementation("io.ktor:ktor-client-js:1.5.1")
+    implementation("io.ktor:ktor-client-serialization:1.5.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1")
 
 }
 

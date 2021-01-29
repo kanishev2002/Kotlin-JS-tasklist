@@ -13,11 +13,12 @@ import react.invoke
 import react.redux.rConnect
 import redux.WrapperAction
 import kotlin.js.Date
+import kotlin.random.Random
 
 
 object IdGenerator {
     var id = 1
-        get() = field++
+        get() = Random.nextInt()
 }
 
 private interface AppStateProps : RProps {

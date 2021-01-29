@@ -10,5 +10,3 @@ data class Task(
     val timeStamp: Date,
     var isCompleted: Boolean
 )
-
-// TODO: add deadlines and date of adding
