@@ -9,7 +9,6 @@ For backend visit [@LarOrr's github](https://github.com/LarOrr/TODO-backend)
 1. Clone this repo through IDEA's interface
 2. In IDEA project Gradle panel choose browser run in kotlin browser folder for debug purposes
 3. To use in production, choose BrowserProductionWebpack. The application will be compiled into `build/distributions` folder.
-4. For backend go to [@LarOrr's github](https://github.com/LarOrr/TODO-backend)
 
 ### In command line
 1. Clone this repo
