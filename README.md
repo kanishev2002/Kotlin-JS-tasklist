@@ -18,5 +18,5 @@ For backend visit [@LarOrr's github](https://github.com/LarOrr/TODO-backend)
 4. Run `./gradlew browserProductionRun ` to build the app for production
 
 ## License
-The application is distributed under BSD-3-Clause license. For terms check out the `licnse.md` file
+The application is distributed under BSD-3-Clause license. For terms check out the `license.md` file
 
